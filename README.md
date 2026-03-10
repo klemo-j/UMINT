@@ -48,19 +48,19 @@ Fitness funkcia je definovaná ako **celková dĺžka dráhy**. Výpočet prebie
 Algoritmus bol spustený 10-krát pre overenie stability.
 ```
 Spúšťam 10 behov Genetického Algoritmu...
-Beh  1 ukončený, finálna dĺžka: 472.5849
-Beh  2 ukončený, finálna dĺžka: 476.6712
+Beh  1 ukončený, finálna dĺžka: 468.1095
+Beh  2 ukončený, finálna dĺžka: 472.5849
 Beh  3 ukončený, finálna dĺžka: 472.5849
 Beh  4 ukončený, finálna dĺžka: 472.5849
-Beh  5 ukončený, finálna dĺžka: 476.6712
-Beh  6 ukončený, finálna dĺžka: 472.5849
+Beh  5 ukončený, finálna dĺžka: 472.5849
+Beh  6 ukončený, finálna dĺžka: 476.6712
 Beh  7 ukončený, finálna dĺžka: 472.5849
-Beh  8 ukončený, finálna dĺžka: 473.7614
+Beh  8 ukončený, finálna dĺžka: 468.1095
 Beh  9 ukončený, finálna dĺžka: 468.1095
 Beh 10 ukončený, finálna dĺžka: 472.5849
 ================================================
 Úplne najkratšia nájdená dĺžka: 468.1095
-================================================
+Najlepšia nájdená trasa:  1 -> 22 ->  3 -> 23 -> 19 -> 18 -> 12 -> 17 ->  4 ->  9 ->  7 -> 20 -> 13 -> 15 ->  2 -> 11 -> 21 -> 24 -> 16 ->  8 ->  5 ->  6 -> 10 -> 14 -> 25
 ```
 **Štatistický záver:** 100 % behov dosiahlo hodnotu $\leq 480$, čím bola podmienka úspešnosti (min. 50 %) splnená.
 
