@@ -43,3 +43,30 @@ Fitness funkcia je definovaná ako **celková dĺžka dráhy**. Výpočet prebie
 * **Veľkosť populácie:** 200 jedincov
 * **Počet generácií:** 2000
 * **Mutácia:** Rozsah mutácie bol obmedzený na indexy `2:numPoints-1` (2 až 24), aby nedošlo k zmene fixného štartu a cieľa.
+
+* ## 6. Vyhodnotenie 10 behov
+Algoritmus bol spustený 10-krát pre overenie stability.
+```
+Spúšťam 10 behov Genetického Algoritmu...
+Beh  1 ukončený, finálna dĺžka: 472.5849
+Beh  2 ukončený, finálna dĺžka: 476.6712
+Beh  3 ukončený, finálna dĺžka: 472.5849
+Beh  4 ukončený, finálna dĺžka: 472.5849
+Beh  5 ukončený, finálna dĺžka: 476.6712
+Beh  6 ukončený, finálna dĺžka: 472.5849
+Beh  7 ukončený, finálna dĺžka: 472.5849
+Beh  8 ukončený, finálna dĺžka: 473.7614
+Beh  9 ukončený, finálna dĺžka: 468.1095
+Beh 10 ukončený, finálna dĺžka: 472.5849
+================================================
+Úplne najkratšia nájdená dĺžka: 468.1095
+================================================
+```
+**Štatistický záver:** 100 % behov dosiahlo hodnotu $\leq 480$, čím bola podmienka úspešnosti (min. 50 %) splnená.
+
+## 7. Vizualizácia
+<img width="1614" height="869" alt="obrázok" src="https://github.com/user-attachments/assets/8c7a4851-9630-4abe-9e5b-36de6a2a765d" />
+
+<img width="1059" height="842" alt="obrázok" src="https://github.com/user-attachments/assets/d420cb8d-3e5f-4a32-b93f-50d6f869444b" />
+
+
