@@ -25,13 +25,28 @@ Pre zabezpečenie stabilnej konvergencie a férového porovnania bolo zvolené r
 
 ---
 
-## 4. Porovnanie hlavných metód pokutovania a analýza grafu
-Po správnom nastavení výšky pokút (aby sa algoritmu neoplatilo limity ignorovať) sme dosiahli ukážkové správanie všetkých metód:
+## 4. Výsledky experimentov a kontrola ohraničení
+Po správnom nastavení výšky pokút algoritmus úspešne otestoval všetky metódy. Nižšie sú uvedené najlepšie dosiahnuté výsledky vrátane kontroly splnenia obmedzení (ak sú všetky hodnoty g1-g4 záporné, ohraničenie je splnené s rezervou).
 
-1. **Úmerná pokuta (Modrá čiara - Najlepšia metóda):** Pokuta viazaná na presnú mieru porušenia (vzdialenosť od limitu) poskytla algoritmu okamžitý a plynulý gradient. Algoritmus vďaka nej vôbec netápal v záporných číslach, takmer okamžite našiel prípustnú oblasť a stabilne konvergoval k teoretickému maximu (~714 000 EUR).
-2. **Stupňovitá pokuta (Zelená čiara):** Trest bol nastavený na prísne 4 milióny za každé porušené pravidlo. Algoritmus začal hlboko v mínuse (všetci jedinci v nultej generácii porušovali pravidlá), no keďže pokuta klesá "schodovito" (2 porušenia sú lepšie ako 3), algoritmus mal aspoň čiastočný návod. Preto sa už okolo 15. generácie dokázal "prehryznúť" do platnej oblasti a dorovnal sa na úmernú pokutu.
-3. **Mŕtva pokuta (Červená čiara):** Najmenej efektívny prístup. Keďže akékoľvek porušenie znamenalo tvrdý pád na fixných -5 000 000 EUR, algoritmus nemal žiadnu nápovedu, či sa zlepšuje alebo zhoršuje. Hľadanie bolo slepé, čo na grafe vidieť ako dlhú rovnú čiaru na dne. Až okolo 115. generácie úplnou náhodou (mutáciou) trafil do prípustnej oblasti a následne vystrelil do kladných čísel.
-4. **Bez pokuty (Čierna čiara - Referencia):** Algoritmus odignoroval pravidlá, investoval 50 miliónov (všetky položky na maximum) a vygeneroval nereálny zisk vyše 3.3 milióna EUR (extrémne prekročenie firemného rozpočtu).
+### A) Mŕtva pokuta (Death Penalty)
+* **Nájdený výnos:** 659 570.15 EUR
+* **Kontrola ohraničení:** **SPLNENÉ** (všetky g < 0)
+* **Zhodnotenie:** Algoritmus úspešne našiel platné riešenie, avšak výnos je z troch funkčných metód najnižší. Je to spôsobené tým, že mŕtva pokuta neposkytuje gradient – akonáhle algoritmus "naslepo" trafil bezpečnú (platnú) zónu, bál sa posunúť bližšie k limitom (kde je vyšší zisk), pretože akákoľvek mutácia by ho zhodila do extrémnej fixnej pokuty.
+
+### B) Stupňovitá pokuta (Step Penalty)
+* **Nájdený výnos:** 705 777.82 EUR
+* **Kontrola ohraničení:** **SPLNENÉ** (všetky g < 0)
+* **Zhodnotenie:** Keďže sme fixný trest za porušenie nastavili dostatočne vysoko (aby nebolo výhodné podvádzať), algoritmus dokázal konvergovat a nájsť veľmi kvalitné platné riešenie. Schodovitý gradient mu pomohol lepšie sa navigovať smerom k prípustnej oblasti ako pri mŕtvej pokute.
+
+### C) Úmerná pokuta (Proportional Penalty)
+* **Nájdený výnos:** 687 803.81 EUR
+* **Kontrola ohraničení:** **SPLNENÉ** (všetky g < 0, napr. rozpočet minutý takmer na doraz, rezerva len 55.48 EUR)
+* **Zhodnotenie:** Úmerná pokuta štandardne poskytuje najhladší gradient pre navigáciu algoritmu, čo mu umožňuje "prilepiť sa" tesne na hranice limitov. *(Pozn.: To, že v tomto konkrétnom behu vyšiel zisk o niečo nižší ako pri stupňovitej pokute, je prirodzená vlastnosť stochastických algoritmov, ktoré využívajú náhodnosť).*
+
+### D) Bez pokuty (Referenčný beh)
+* **Nájdený výnos:** 3 300 000.00 EUR
+* **Kontrola ohraničení:** **NESPLNENÉ / EXTRÉMNE PORUŠENÉ** (g1 = 40 000 000 EUR, g2 = 17 500 000 EUR)
+* **Zhodnotenie:** Ako sa očakávalo, bez akýchkoľvek pokút algoritmus maximalizoval výnos tým, že vložil maximum (10 miliónov) do každej položky. Firemný rozpočet prekročil o 40 miliónov eur. Tento beh slúži ako dôkaz nevyhnutnosti penalizácie v optimalizačných úlohách.
 
 ---
 
@@ -48,5 +63,5 @@ Aby sme pochopili citlivosť algoritmu na veľkosť pokuty, otestovali sme úmer
 
 ![Graf konvergencie metód pokutovania a veľkostí pokút](https://github.com/klemo-j/UMINT/raw/3b0314388ee8db09d44d94d5f9a97ea30275458b/CV4/lepsigrag.png)
 
-**Záver:**
-Graf krásne demonštruje rozdiel v gradientoch. Mŕtva pokuta (červená) bez gradientu dlho tápe naslepo. Stupňovitá (zelená) s hrubým gradientom sa chytí rýchlejšie. Úmerná pokuta (modrá) má dokonalý hladký gradient a dominuje od prvej generácie. Krivka "bez pokuty" (čierna) slúži ako dôkaz, že optimalizácia v ohraničenom priestore bez penalizácie vedie k nereálnym a nepoužiteľným výsledkom.
+**Záver k vizualizácii:**
+Graf krásne demonštruje rozdiel v gradientoch. Mŕtva pokuta bez gradientu dlho tápe naslepo. Stupňovitá s hrubým gradientom sa chytí rýchlejšie. Úmerná pokuta má dokonalý hladký gradient a dominuje od prvej generácie. Krivka "bez pokuty" slúži ako dôkaz, že optimalizácia v ohraničenom priestore bez penalizácie vedie k nereálnym a nepoužiteľným výsledkom.
