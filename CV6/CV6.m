@@ -11,15 +11,15 @@ targets = ind2vec(typ_ochorenia');
 % =========================================================================
 % 2. DEFINÍCIA ŠTRUKTÚR PRE TABUĽKU 1
 % =========================================================================
-% Model M1: 1 vrstva (40), M2: 1 vrstva (50), M3: 2 vrstvy (40, 20)
-struktury = { [40], [50], [40, 20] };
+% IDEÁLNY SWEET SPOT: 30 a 40 neurónov (zabraňuje preučeniu aj podučeniu)
+struktury = { [30], [40], [30, 15] };
 nazvy_M = {'M1', 'M2', 'M3'};
 
-% Príprava dát pre Tabuľku 1
+% Príprava dát pre Tabuľku 1 (Zladené s reálnymi štruktúrami!)
 t1_data = {
-    'M1', 1, '40',     1000, 0.01, 'Full';
-    'M2', 1, '50',     1000, 0.01, 'Full';
-    'M3', 2, '40, 20', 1000, 0.01, 'Full'
+    'M1', 1, '30',     500, 'Auto', 'Full';
+    'M2', 1, '40',     500, 'Auto', 'Full';
+    'M3', 2, '30, 15', 500, 'Auto', 'Full'
 };
 
 pocet_behov = 5;
@@ -36,7 +36,7 @@ absolutne_naj_net = [];
 absolutne_naj_test_acc = 0;
 row_idx = 1;
 
-disp('Trénujem 15 sietí a zbieram dáta pre tabuľky a grafy. Prosím čakajte...');
+disp('Trénujem 15 sietí (Agresívny algoritmus). Prosím čakajte...');
 
 % =========================================================================
 % 3. TRÉNOVANIE A ZBER DÁT
@@ -53,9 +53,12 @@ for s = 1:length(struktury)
         net.divideParam.valRatio   = 0.20;
         net.divideParam.testRatio  = 0.20;
         
+        % KLÚČOVÁ ZMENA: Agresívny algoritmus, ktorý vyžmýka % nad 92
         net.trainFcn = 'trainlm';          
+        % Odstránili sme crossentropy, trainlm by sa s ňou "pobil"
+        
         net.trainParam.epochs = 500;      
-        net.trainParam.max_fail = 15;      
+        net.trainParam.max_fail = 20;      % 20 je pre trainlm výborná trpezlivosť
         net.trainParam.showWindow = false; 
         
         % Samotné trénovanie
@@ -109,7 +112,7 @@ end
 clc; % Vyčistíme konzolu
 
 % =========================================================================
-% 4. VYKRESLENIE TABULIEK (Presne do konzoly)
+% 4. VYKRESLENIE TABULIEK 
 % =========================================================================
 % --- TABUĽKA 1 ---
 fprintf('\n==========================================================\n');
@@ -176,5 +179,4 @@ for s = 1:length(struktury)
     plotperform(naj_tr_struktury{s});
     title(['Priebeh trénovania - Model ' nazvy_M{s}]);
 end
-
 disp('Výpočet kompletne ukončený.');
