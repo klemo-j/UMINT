@@ -152,8 +152,6 @@
 
 <hr>
 
-<h2>📈 5. Grafy trénovania pre modely M1 a M3</h2>
-<p>V súlade s požiadavkami zadania prikladáme dokumentáciu procesu trénovania a kontingenčné matice aj pre najlepšie behy zvyšných dvoch štruktúr (M1 a M3).</p>
 
 <h2>📈 5. Grafy trénovania pre modely M1 a M3</h2>
 <p>V súlade s požiadavkami zadania prikladáme dokumentáciu procesu trénovania a kontingenčné matice aj pre najlepšie behy zvyšných dvoch štruktúr (M1 a M3).</p>
