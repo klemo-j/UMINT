@@ -2,18 +2,18 @@
 <h3 align="center">Klasifikácia údajov pomocou neurónových sietí</h3>
 
 <p>
-  Tento projekt sa zaoberá návrhom, trénovaním a porovnaním troch rôznych architektúr neurónových sietí (M1, M2, M3) za účelom klasifikácie vstupných údajov z CTG vyšetrenia do troch tried: normálny, podozrivý a patologický[cite: 104, 107, 108, 109, 110, 111, 112].
+  Tento projekt sa zaoberá návrhom, trénovaním a porovnaním troch rôznych architektúr neurónových sietí (M1, M2, M3) za účelom klasifikácie vstupných údajov z CTG vyšetrenia do troch tried: normálny, podozrivý a patologický.
 </p>
 
 <blockquote>
-  <strong>Cieľ zadania:</strong> Dosiahnuť priemernú úspešnosť testovania (Test Accuracy) nad 92 % z 5 spustení[cite: 114].
+  <strong>Cieľ zadania:</strong> Dosiahnuť priemernú úspešnosť testovania (Test Accuracy) nad 92 % z 5 spustení.
 </blockquote>
 
 <hr>
 
 <h2>⚙️ 1. Architektúra modelov a hyperparametre</h2>
 <p>
-  Pre experiment bolo navrhnutých 15 behov (5 pre každý model) s nasledujúcimi konfiguračnými parametrami[cite: 136, 137]. Learning Rate bol nastavený na automatický odhad ('Auto').
+  Pre experiment bolo navrhnutých 15 behov (5 pre každý model) s nasledujúcimi konfiguračnými parametrami. Learning Rate bol nastavený na automatický odhad ('Auto'). Všetky modely využívali rovnaké trénovacie funkcie a podmienky (max_fail = 20) pre zachovanie férovosti testovania.
 </p>
 
 <table border="1" cellpadding="5" cellspacing="0" align="center">
@@ -59,7 +59,7 @@
 
 <h2>📊 2. Finálne porovnanie a dosiahnutie cieľa</h2>
 <p>
-  V nasledujúcej tabuľke je zhrnutie štatistických výsledkov pre jednotlivé modely z ich 5 trénovacích behov[cite: 139].
+  V nasledujúcej tabuľke je zhrnutie štatistických výsledkov pre jednotlivé modely z ich 5 trénovacích behov na nezávislých <strong>testovacích dátach</strong>.
 </p>
 
 <table border="1" cellpadding="5" cellspacing="0" align="center">
@@ -102,20 +102,24 @@
 </table>
 
 <p>
-  <strong>Záver:</strong> Modely <strong>M2</strong> aj <strong>M3</strong> v priemere úspešne prekonali stanovenú hranicu 92 %. Najlepšie výsledky dosiahol model <strong>M2</strong> (1 skrytá vrstva so 40 neurónmi), ktorý mal najvyššiu priemernú úspešnosť a najnižšiu chybovosť.
+  <strong>Záver pre Testovacie dáta:</strong> Modely <strong>M2</strong> aj <strong>M3</strong> v priemere úspešne prekonali stanovenú hranicu 92 %. Najlepšie výsledky dosiahol model <strong>M2</strong> (1 skrytá vrstva so 40 neurónmi), ktorý mal najvyššiu priemernú úspešnosť a najnižšiu chybovosť.
+</p>
+
+<p>
+  <strong>Zhodnotenie Trénovacích dát:</strong> Priemerná úspešnosť na trénovacích dátach bola u všetkých modelov prirodzene vyššia (M1: ~96.9 %, M2: ~98.7 %, M3: ~98.8 %). Z výsledkov vyplýva, že model M2 predstavuje ideálny kompromis (sweet-spot), kedy mal dostatočnú kapacitu na pochopenie zložitejších vzťahov, no vďaka mechanizmu Early Stopping sa vyhol preučeniu (overfittingu), čo dokazuje jeho víťazstvo na testovacej sade.
 </p>
 
 <div align="center">
   <h3>Ukážka trénovania víťazného modelu M2</h3>
   <img src="https://raw.githubusercontent.com/klemo-j/UMINT/CV6/CV6/data/testovanie2.png" alt="Graf priebehu trénovania" width="80%">
-  <p><em>Graf: Priebeh Loss a Accuracy počas trénovania modelu[cite: 161, 167].</em></p>
+  <p><em>Graf: Priebeh Loss a Accuracy počas trénovania najlepšieho modelu M2.</em></p>
 </div>
 
 <hr>
 
 <h2>🏆 3. Detailná analýza najlepšej siete (M2)</h2>
 <p>
-  Pre najlepšiu nájdenú sieť z modelu M2 boli vypočítané metriky senzitivity a špecificity pre jednotlivé triedy[cite: 142, 168].
+  Pre absolútne najlepšiu nájdenú sieť z modelu M2 boli vypočítané metriky senzitivity a špecificity pre jednotlivé triedy.
 </p>
 
 <ul>
@@ -133,14 +137,37 @@
 
 <h2>🎯 4. Otestovanie na neznámych vzorkách</h2>
 <p>
-  Finálna sieť bola otestovaná na troch konkrétnych, pre sieť neznámych vzorkách[cite: 140, 168].
+  Finálna sieť bola otestovaná na troch konkrétnych, pre sieť neznámych vzorkách z datasetu.
 </p>
 
 <ul>
-  <li>Vzorka zo skutočnej triedy <strong>1</strong> bola sieťou zaradená do: <strong>1</strong> ✅ (Správne) [cite: 141]</li>
-  <li>Vzorka zo skutočnej triedy <strong>2</strong> bola sieťou zaradená do: <strong>2</strong> ✅ (Správne) [cite: 141]</li>
-  <li>Vzorka zo skutočnej triedy <strong>3</strong> bola sieťou zaradená do: <strong>2</strong> ❌ (Nesprávne klasifikované) [cite: 141]</li>
+  <li>Vzorka zo skutočnej triedy <strong>1</strong> bola sieťou zaradená do: <strong>1</strong> ✅ (Správne)</li>
+  <li>Vzorka zo skutočnej triedy <strong>2</strong> bola sieťou zaradená do: <strong>2</strong> ✅ (Správne)</li>
+  <li>Vzorka zo skutočnej triedy <strong>3</strong> bola sieťou zaradená do: <strong>2</strong> ❌ (Nesprávne klasifikované)</li>
 </ul>
+
+<p>
+  <strong>Zhodnotenie chyby:</strong> Fakt, že sieť nesprávne klasifikovala patologickú vzorku (Trieda 3) ako podozrivú (Trieda 2), koreluje so zisteniami z konfúznej matice (a najnižšou senzitivitou pri Triede 2). Tieto dva stavy majú k sebe parametrovo najbližšie a ide o hraničné medicínske hodnoty, pri ktorých je separácia pre umelú sieť aj pre lekára najnáročnejšia. Sieť však s takmer 100 % istotou oddelila zdravé vzorky od oboch rizikových skupín.
+</p>
+
+<hr>
+
+<h2>📈 5. Grafy trénovania pre modely M1 a M3</h2>
+<p>V súlade s požiadavkami zadania prikladáme dokumentáciu procesu trénovania a kontingenčné matice aj pre najlepšie behy zvyšných dvoch štruktúr (M1 a M3).</p>
+
+<details>
+  <summary><strong>👉 Klikni sem pre zobrazenie grafov pre modely M1 a M3</strong></summary>
+  <br>
+  <div align="center">
+    <h4>Najlepšia sieť z modelu M1 (30 neurónov)</h4>
+    <img src="VLOZ_LINK_NA_MATICU_M1.png" alt="Konfúzna matica M1" width="45%">
+    <img src="VLOZ_LINK_NA_PERFORMANCE_M1.png" alt="Priebeh trénovania M1" width="45%">
+    
+    <h4>Najlepšia sieť z modelu M3 (30, 15 neurónov)</h4>
+    <img src="VLOZ_LINK_NA_MATICU_M3.png" alt="Konfúzna matica M3" width="45%">
+    <img src="VLOZ_LINK_NA_PERFORMANCE_M3.png" alt="Priebeh trénovania M3" width="45%">
+  </div>
+</details>
 
 <hr>
 
@@ -149,7 +176,7 @@
   <summary><strong>👉 Klikni sem pre zobrazenie kompletnej tabuľky trénovacích behov</strong></summary>
   <br>
   <p>
-    Tu sú uvedené surové dáta z výpočtov pre všetky trénovacie behy, na základe ktorých boli vypočítané finálne štatistiky[cite: 166].
+    Tu sú uvedené surové dáta z výpočtov pre všetky trénovacie behy, na základe ktorých boli vypočítané finálne štatistiky.
   </p>
   
   <table border="1" cellpadding="5" cellspacing="0" align="center">
