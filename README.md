@@ -155,18 +155,21 @@
 <h2>📈 5. Grafy trénovania pre modely M1 a M3</h2>
 <p>V súlade s požiadavkami zadania prikladáme dokumentáciu procesu trénovania a kontingenčné matice aj pre najlepšie behy zvyšných dvoch štruktúr (M1 a M3).</p>
 
+<h2>📈 5. Grafy trénovania pre modely M1 a M3</h2>
+<p>V súlade s požiadavkami zadania prikladáme dokumentáciu procesu trénovania a kontingenčné matice aj pre najlepšie behy zvyšných dvoch štruktúr (M1 a M3).</p>
+
 <details>
-  <summary><strong>👉 Klikni sem pre zobrazenie grafov pre modely M1 a M3</strong></summary>
-  <br>
-  <div align="center">
-    <h4>Najlepšia sieť z modelu M1 (30 neurónov)</h4>
-    <img src="VLOZ_LINK_NA_MATICU_M1.png" alt="Konfúzna matica M1" width="45%">
-    <img src="VLOZ_LINK_NA_PERFORMANCE_M1.png" alt="Priebeh trénovania M1" width="45%">
-    
-    <h4>Najlepšia sieť z modelu M3 (30, 15 neurónov)</h4>
-    <img src="VLOZ_LINK_NA_MATICU_M3.png" alt="Konfúzna matica M3" width="45%">
-    <img src="VLOZ_LINK_NA_PERFORMANCE_M3.png" alt="Priebeh trénovania M3" width="45%">
-  </div>
+<summary><strong>👉 Klikni sem pre zobrazenie grafov pre modely M1 a M3</strong></summary>
+<br>
+<div align="center">
+<h4>Najlepšia sieť z modelu M1 (30 neurónov)</h4>
+<img src="https://raw.githubusercontent.com/klemo-j/UMINT/e829d5790a5f98dc8275af6fea71dcb80d90a15e/CV6/data/matica1.png" alt="Konfúzna matica M1" width="45%">
+<img src="https://raw.githubusercontent.com/klemo-j/UMINT/e829d5790a5f98dc8275af6fea71dcb80d90a15e/CV6/data/trenovanie1.png" alt="Priebeh trénovania M1" width="45%">
+
+<h4>Najlepšia sieť z modelu M3 (30, 15 neurónov)</h4>
+<img src="https://raw.githubusercontent.com/klemo-j/UMINT/e829d5790a5f98dc8275af6fea71dcb80d90a15e/CV6/data/matica3.png" alt="Konfúzna matica M3" width="45%">
+<img src="https://raw.githubusercontent.com/klemo-j/UMINT/e829d5790a5f98dc8275af6fea71dcb80d90a15e/CV6/data/testovanie3.png" alt="Priebeh trénovania M3" width="45%">
+</div>
 </details>
 
 <hr>
