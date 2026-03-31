@@ -1,16 +1,16 @@
 %% UMINT - Zadanie 6: Klasifikácia CTG dát (Tabuľkový výstup + Všetky grafy)
 clc; clear; close all;
 
-% =========================================================================
+
 % 1. NAČÍTANIE DÁT
-% =========================================================================
+
 load('CTGdata.mat');
 inputs = NDATA';               
 targets = ind2vec(typ_ochorenia'); 
 
-% =========================================================================
+
 % 2. DEFINÍCIA ŠTRUKTÚR PRE TABUĽKU 1
-% =========================================================================
+
 % IDEÁLNY SWEET SPOT: 30 a 40 neurónov (zabraňuje preučeniu aj podučeniu)
 struktury = { [30], [40], [30, 15] };
 nazvy_M = {'M1', 'M2', 'M3'};
@@ -38,9 +38,9 @@ row_idx = 1;
 
 disp('Trénujem 15 sietí (Agresívny algoritmus). Prosím čakajte...');
 
-% =========================================================================
+
 % 3. TRÉNOVANIE A ZBER DÁT
-% =========================================================================
+
 for s = 1:length(struktury)
     
     acc_test_pole = zeros(1, pocet_behov);
@@ -53,15 +53,15 @@ for s = 1:length(struktury)
         net.divideParam.valRatio   = 0.20;
         net.divideParam.testRatio  = 0.20;
         
-        % KLÚČOVÁ ZMENA: Agresívny algoritmus, ktorý vyžmýka % nad 92
+     
         net.trainFcn = 'trainlm';          
-        % Odstránili sme crossentropy, trainlm by sa s ňou "pobil"
+      
         
         net.trainParam.epochs = 500;      
         net.trainParam.max_fail = 20;      % 20 je pre trainlm výborná trpezlivosť
         net.trainParam.showWindow = false; 
         
-        % Samotné trénovanie
+        %trénovanie
         [net, tr] = train(net, inputs, targets);
         
         % Výpočet metrík pre TRAIN
@@ -78,29 +78,29 @@ for s = 1:length(struktury)
         [c_test, ~] = confusion(targ_test, out_test);
         acc_test = (1 - c_test) * 100;
         
-        % Uloženie do pamäte
+        % Uloženie 
         acc_test_pole(beh) = acc_test;
         loss_test_pole(beh) = loss_test;
         
-        % Zápis jedného riadku do Tabuľky 2
+        % Zápis Tabuľky 2
         t2_data(row_idx, :) = {nazvy_M{s}, beh, round(loss_train,4), round(loss_test,4), round(acc_train,2), round(acc_test,2)};
         row_idx = row_idx + 1;
         
-        % Zachovanie najlepšej siete PRE DANÚ ŠTRUKTÚRU (kvôli grafom)
+        % Zachovanie najlepšej siete 
         if acc_test > naj_test_acc_v_strukture(s)
             naj_test_acc_v_strukture(s) = acc_test;
             naj_net_struktury{s} = net;
             naj_tr_struktury{s} = tr;
         end
         
-        % Zachovanie ABSOLÚTNE NAJLEPŠEJ siete zo všetkých 15 behov
+        %  ABSOLÚTNE NAJLEPŠEJ 
         if acc_test > absolutne_naj_test_acc
             absolutne_naj_test_acc = acc_test;
             absolutne_naj_net = net;
         end
     end
     
-    % Výpočet štatistiky pre Tabuľku 3
+    % Výpoče Tabuľku 3
     min_acc = round(min(acc_test_pole), 2);
     max_acc = round(max(acc_test_pole), 2);
     priemer_acc = round(mean(acc_test_pole), 2);
@@ -109,11 +109,11 @@ for s = 1:length(struktury)
     summary_data(s, :) = {nazvy_M{s}, min_acc, max_acc, priemer_acc, priemer_loss};
 end
 
-clc; % Vyčistíme konzolu
+clc; 
 
-% =========================================================================
+
 % 4. VYKRESLENIE TABULIEK 
-% =========================================================================
+
 % --- TABUĽKA 1 ---
 fprintf('\n==========================================================\n');
 fprintf('Tabulka 1: Architektura modelov a Hyperparametre\n');
@@ -135,9 +135,9 @@ fprintf('==========================================================\n');
 T3 = cell2table(summary_data, 'VariableNames', {'Model', 'Min_Acc', 'Max_Acc', 'Priemer_Acc', 'Priemer_Loss'});
 disp(T3);
 
-% =========================================================================
+
 % 5. DOPLNKOVÉ POŽIADAVKY ZADANIA (Senzitivita a Testovanie vzoriek)
-% =========================================================================
+
 fprintf('\n==========================================================\n');
 fprintf('ANALYZA NAJLEPŠEJ SIETE (Senzitivita a Otestovanie vzoriek)\n');
 fprintf('==========================================================\n');
@@ -165,9 +165,9 @@ for i = 1:3
     fprintf('Vzorka zo skutocnej triedy %d bola sietou zaradena do: %d\n', i, odhadnuta_trieda);
 end
 
-% =========================================================================
+
 % 6. VYKRESLENIE GRAFOV PRE NAJLEPŠIU SIEŤ Z KAŽDEJ ŠTRUKTÚRY
-% =========================================================================
+
 for s = 1:length(struktury)
     % Vykreslenie Confusion Matrix
     figure('Name', ['Confusion Matrix - Najlepšia sieť z modelu ' nazvy_M{s}]);
