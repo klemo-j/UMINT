@@ -11,7 +11,7 @@ targets = ind2vec(typ_ochorenia');
 
 % 2. DEFINÍCIA ŠTRUKTÚR PRE TABUĽKU 1
 
-% IDEÁLNY SWEET SPOT: 30 a 40 neurónov (zabraňuje preučeniu aj podučeniu)
+
 struktury = { [30], [40], [30, 15] };
 nazvy_M = {'M1', 'M2', 'M3'};
 
