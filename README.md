@@ -63,6 +63,11 @@
 </table>
 <p align="center"><em>Tabuľka 2: Výsledky 5 spustení pre prvú štruktúru MLP.</em></p>
 
+<img src="pic/lahke_MLP_loss.png" width="45%">
+
+<img src="pic/lahke_MLP-confusion.png" width="45%">
+
+
 <h3>1.3 Výsledky 5 spustení pre MLP 2 (256 - 128 neurónov)</h3>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -83,6 +88,11 @@
   </tbody>
 </table>
 <p align="center"><em>Tabuľka 3: Výsledky 5 spustení pre druhú štruktúru MLP.</em></p>
+
+<img src="pic/stredna_MLP_loss.png" width="45%">
+
+
+<img src="pic/stredna_MLP_confusion.png" width="45%">
 
 <h3>1.4 Súhrnné porovnanie MLP</h3>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
@@ -118,15 +128,9 @@
   <strong>Zhodnotenie MLP:</strong> Z výsledkov je zrejmé, že pridanie ďalšej skrytej vrstvy a navýšenie počtu neurónov (MLP 2) prinieslo mierne, ale stabilné zlepšenie presnosti z 96.91 % na 97.31 % a zároveň znížilo priemernú testovaciu chybu. Pre úlohy počítačového videnia však táto architektúra stále nie je ideálna, čo ukáže porovnanie so sieťami typu CNN.
 </p>
 
-<div align="center">
-  <br>
-  <img src="data/lahke_MLP_loss.png" alt="Priebeh učenia MLP" width="45%">
-  <img src="data/lahke_MLP-confusion.png" alt="Matica zámen MLP" width="35%">
-  <p><em>Priebeh učenia (Loss) a Matica zámen pre štruktúru MLP.</em></p>
-</div>
 
 <div align="center">
-  <img src="data/MLP_Ukážky_klasifikácie.png" alt="Ukážka klasifikácie MLP" width="80%">
+  <img src=pic/stredna_CNN_obrazky.png" width="80%">
   <p><em>Predikcia modelu MLP na náhodne vybraných vzorkách z testovacieho datasetu.</em></p>
 </div>
 
