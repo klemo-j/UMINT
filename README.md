@@ -64,8 +64,9 @@
 <p align="center"><em>Tabuľka 2: Výsledky 5 spustení pre prvú štruktúru MLP.</em></p>
 
 <div align="center">
-  <img src="pic/lahke_MLP_loss.png" width="45%">
-  <img src="pic/lahke_MLP-confusion.png" width="45%">
+  <img src="pic/lahke_MLP_loss.png" width="45%" alt="Priebeh trénovania MLP 1">
+  <img src="pic/lahke_MLP-confusion.png" width="45%" alt="Konfúzna matica MLP 1">
+  <p><em>Obr. 1: Graf straty (Loss) a konfúzna matica pre Model MLP 1.</em></p>
 </div>
 
 <h3>1.3 Výsledky 5 spustení pre MLP 2 (256 - 128 neurónov)</h3>
@@ -90,8 +91,9 @@
 <p align="center"><em>Tabuľka 3: Výsledky 5 spustení pre druhú štruktúru MLP.</em></p>
 
 <div align="center">
-  <img src="pic/stredna_MLP_loss.png" width="45%">
-  <img src="pic/stredna_MLP_confusion.png" width="45%">
+  <img src="pic/stredna_MLP_loss.png" width="45%" alt="Priebeh trénovania MLP 2">
+  <img src="pic/stredna_MLP_confusion.png" width="45%" alt="Konfúzna matica MLP 2">
+  <p><em>Obr. 2: Graf straty (Loss) a konfúzna matica pre Model MLP 2.</em></p>
 </div>
 
 <h3>1.4 Súhrnné porovnanie MLP</h3>
@@ -129,8 +131,8 @@
 </p>
 
 <div align="center">
-  <img src="pic/stredna_CNN_obrazky.png" width="80%">
-  <p><em>Predikcia modelu MLP na náhodne vybraných vzorkách z testovacieho datasetu.</em></p>
+  <img src="pic/stredna_CNN_obrazky.png" width="80%" alt="Ukážka klasifikácie MLP">
+  <p><em>Obr. 3: Predikcia modelu MLP na náhodne vybraných vzorkách z testovacieho datasetu.</em></p>
 </div>
 
 <hr>
@@ -201,9 +203,12 @@
 </table>
 <p align="center"><em>Tabuľka 6: Výsledky 5 spustení pre prvú architektúru CNN.</em></p>
 
-<img src="pic/lahka_CNN_training.png" width="45%">
-<img src="pic/lahka_CNN_obrazky.png" width="45%">
-<img src="pic/lahka_CNN_confusion.png" width="45%">
+<div align="center">
+  <img src="pic/lahka_CNN_training.png" width="31%" alt="Priebeh trénovania CNN 1">
+  <img src="pic/lahka_CNN_obrazky.png" width="31%" alt="Ukážka klasifikácie CNN 1">
+  <img src="pic/lahka_CNN_confusion.png" width="31%" alt="Konfúzna matica CNN 1">
+  <p><em>Obr. 4: Trénovanie, vzorky a matica pre Ľahkú CNN.</em></p>
+</div>
 
 <h4>Stredná CNN (Architektúra 2)</h4>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
@@ -226,9 +231,12 @@
 </table>
 <p align="center"><em>Tabuľka 7: Výsledky 5 spustení pre druhú architektúru CNN.</em></p>
 
-<img src="pic/stredna_CNN_traning.png" width="45%">
-<img src="pic/stredna_CNN_obrazky.png" width="45%">
-<img src="pic/stredna_CNN_confusion.png" width="45%">
+<div align="center">
+  <img src="pic/stredna_CNN_traning.png" width="31%" alt="Priebeh trénovania CNN 2">
+  <img src="pic/stredna_CNN_obrazky.png" width="31%" alt="Ukážka klasifikácie CNN 2">
+  <img src="pic/stredna_CNN_confusion.png" width="31%" alt="Konfúzna matica CNN 2">
+  <p><em>Obr. 5: Trénovanie, vzorky a matica pre Strednú CNN.</em></p>
+</div>
 
 <h4>Hlboká CNN (Architektúra 3)</h4>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
@@ -251,9 +259,12 @@
 </table>
 <p align="center"><em>Tabuľka 8: Výsledky 5 spustení pre tretiu architektúru CNN.</em></p>
 
-<img src="pic/tazka_CNN_traning.png" width="45%">
-<img src="pic/tazka_CNN_obrazky.png" width="45%">
-<img src="pic/tazka_CNN_confusion.png" width="45%">
+<div align="center">
+  <img src="pic/tazka_CNN_traning.png" width="31%" alt="Priebeh trénovania CNN 3">
+  <img src="pic/tazka_CNN_obrazky.png" width="31%" alt="Ukážka klasifikácie CNN 3">
+  <img src="pic/tazka_CNN_confusion.png" width="31%" alt="Konfúzna matica CNN 3">
+  <p><em>Obr. 6: Trénovanie, vzorky a matica pre Hlbokú CNN.</em></p>
+</div>
 
 <h3>2.3 Súhrnné porovnanie architektúr CNN</h3>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
@@ -291,8 +302,6 @@
   </tbody>
 </table>
 <p align="center"><em>Tabuľka 9: Súhrnné porovnanie porovnávaných architektúr CNN.</em></p>
-
-
 
 <hr>
 
@@ -372,9 +381,12 @@
   <strong>Zhodnotenie:</strong> Výsledky preukázali význam regularizácie. Zatiaľ čo pri nulovom dropoute dochádzalo k rýchlemu memorovaniu dát (pretrénovanie v 62. iterácii), nasadenie veľmi silného dropoutu (0.7) posunulo tento bod až na 193. iteráciu. Model tak nadobudol výbornú generalizačnú schopnosť.
 </p>
 
-<img src="pic/lahka_CNN_0drop_training.png" width="45%">
-<img src="pic/lahka_CNN_0.7drop_training.png" width="45%">
-<img src="pic/lahka_CNN_0.3drop_training.png" width="45%">
+<div align="center">
+  <img src="pic/lahka_CNN_0drop_training.png" width="31%" alt="Dropout 0.0">
+  <img src="pic/lahka_CNN_0.3drop_training.png" width="31%" alt="Dropout 0.3">
+  <img src="pic/lahka_CNN_0.7drop_training.png" width="31%" alt="Dropout 0.7">
+  <p><em>Obr. 7: Porovnanie vplyvu rôznych hodnôt dropoutu na stabilitu trénovania.</em></p>
+</div>
 
 <hr>
 
