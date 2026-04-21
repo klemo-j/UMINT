@@ -1,7 +1,7 @@
 %% UMINT - Zadanie 7: ČASŤ 1 - MLP Siete (cez patternnet)
 clc; clear; close all;
 
-volba_modelu = 1; % Nastavené na 2 pre tvoj posledný beh!
+volba_modelu = 1; % 2
 
 %% 1. NASTAVENIE CIEST A NAČÍTANIE DÁT
 trainImgPath = 'MNIST_MATLAB/train/images.idx3-ubyte';
