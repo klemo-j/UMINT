@@ -1,0 +1,185 @@
+%% UMINT - Zadanie 7: ČASŤ 2 - CNN Siete
+clc; clear; close all;
+
+volba_modelu = 1;    % Zmeň na 1, 2, alebo 3
+volba_dropout = 0.2; % 0.0, 0.3, alebo 0.5 pre testovanie dropoutu
+
+%% 1. NASTAVENIE CIEST A NAČÍTANIE DÁT
+% Predpoklad: súbory sú v priečinku 'MNIST_MATLAB'
+trainImgPath = 'MNIST_MATLAB/train/images.idx3-ubyte';
+trainLblPath = 'MNIST_MATLAB/train/labels.idx1-ubyte';
+testImgPath  = 'MNIST_MATLAB/test/images.idx3-ubyte';
+testLblPath  = 'MNIST_MATLAB/test/labels.idx1-ubyte';
+
+% Načítanie dát pomocou funkcií (definované na konci súboru)
+XTrainAll = loadMNISTImages(trainImgPath);
+YTrainAll = categorical(loadMNISTLabels(trainLblPath));
+XTest = loadMNISTImages(testImgPath);
+YTest = categorical(loadMNISTLabels(testLblPath));
+
+% Rozdelenie tréningových dát na Train (85%) a Validation (15%)
+numTrain = size(XTrainAll, 4);
+idx = randperm(numTrain);
+splitIdx = floor(0.85 * numTrain);
+XTrain = XTrainAll(:,:,:,idx(1:splitIdx));
+YTrain = YTrainAll(idx(1:splitIdx));
+XVal = XTrainAll(:,:,:,idx(splitIdx+1:end));
+YVal = YTrainAll(idx(splitIdx+1:end));
+
+%% 2. DEFINÍCIA ARCHITEKTÚRY (3 rôzne CNN modely)
+% volba_modelu: 1 = Ľahká CNN, 2 = Stredná CNN (pôvodná), 3 = Hlboká CNN
+if volba_modelu == 1
+    % ŠTRUKTÚRA 1: Ľahká CNN (rýchla, menej parametrov)
+    layers = [
+        imageInputLayer([28 28 1])
+        convolution2dLayer(3, 32, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        maxPooling2dLayer(2, 'Stride', 2)
+        
+        fullyConnectedLayer(128)
+        reluLayer()
+        dropoutLayer(volba_dropout) 
+        fullyConnectedLayer(10)
+        softmaxLayer()
+        classificationLayer()
+    ];
+    fprintf('Zvolená štruktúra: Ľahká CNN (16 filtrov, 128 FC neurónov)\n');
+elseif volba_modelu == 2
+    % ŠTRUKTÚRA 2: Stredná CNN (tvoj pôvodný návrh)
+    layers = [
+        imageInputLayer([28 28 1])
+        
+        convolution2dLayer(3, 32, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        maxPooling2dLayer(2, 'Stride', 2)
+        
+        convolution2dLayer(3, 64, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        
+        fullyConnectedLayer(128)
+        reluLayer()
+        dropoutLayer(volba_dropout) 
+        fullyConnectedLayer(10)
+        softmaxLayer()
+        classificationLayer()
+    ];
+    fprintf('Zvolená štruktúra: Stredná CNN (32-64 filtrov, 128 FC neurónov)\n');
+else
+    % ŠTRUKTÚRA 3: Hlboká CNN (viac konvolúcií pre lepšiu extrakciu čŕt)
+    layers = [
+        imageInputLayer([28 28 1])
+        
+        % 1. blok
+        convolution2dLayer(4, 32, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        
+        % 2. blok
+        convolution2dLayer(4, 64, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        maxPooling2dLayer(2, 'Stride', 2)
+        
+        % 3. blok
+        convolution2dLayer(4, 128, 'Padding', 'same')
+        batchNormalizationLayer()
+        reluLayer()
+        maxPooling2dLayer(2, 'Stride', 2)
+        
+        fullyConnectedLayer(256)
+        reluLayer()
+        dropoutLayer(volba_dropout) 
+        fullyConnectedLayer(10)
+        softmaxLayer()
+        classificationLayer()
+    ];
+    fprintf('Zvolená štruktúra: Hlboká CNN (32-64-128 filtrov, 256 FC neurónov)\n');
+end
+
+%% 3. NASTAVENIE TRÉNOVANIA
+options = trainingOptions('adam', ...
+    'MaxEpochs', 40, ...
+    'MiniBatchSize', 128, ...
+    'InitialLearnRate', 0.0005, ...
+    'ValidationData', {XVal, YVal}, ...
+    'ValidationFrequency', 50, ...
+    'ValidationPatience', 30, ...
+    'Plots', 'training-progress', ...
+    'Verbose', false, ...
+    'ExecutionEnvironment', 'gpu'); % Zmeň na 'cpu' / 'gpu' pre meranie času 
+
+%% 4. SPUSTENIE 5 OPAKOVANÍ
+testAccuracies = zeros(5, 1);
+overtrainEpochs = zeros(5, 1); % Pole na uloženie bodu pretrénovania
+tic; % Spustenie stopiek pre meranie času 
+
+for i = 1:5
+    fprintf('Spúšťam trénovanie behu č. %d/5...\n', i);
+    
+    % Trénovanie a získanie info pre zistenie chyby
+    [net, info] = trainNetwork(XTrain, YTrain, layers, options);
+    
+    % Zistenie epochy pretrénovania
+    valLosses = info.ValidationLoss(~isnan(info.ValidationLoss));
+    if isempty(valLosses)
+        minEpoch = options.MaxEpochs; % Poistka
+    else
+        [~, minEpoch] = min(valLosses); 
+    end
+    overtrainEpochs(i) = minEpoch; % Zápis do poľa
+    
+    % Klasifikácia testovacích dát
+    YPred = classify(net, XTest);
+    testAccuracies(i) = sum(YPred == YTest)/numel(YTest) * 100;
+    fprintf('Ukončený beh %d - Test Accuracy: %.2f%% (Pretrénovanie: %d. iterácia)\n', i, testAccuracies(i), minEpoch);
+end
+totalTime = toc;
+
+%% 5. VYHODNOTENIE
+fprintf('\n--- VÝSLEDKY ---\n');
+fprintf('Priemerná úspešnosť: %.2f%%\n', mean(testAccuracies));
+fprintf('Minimálna úspešnosť: %.2f%%\n', min(testAccuracies));
+fprintf('Maximálna úspešnosť: %.2f%%\n', max(testAccuracies));
+fprintf('Priemerný bod pretrénovania: %.1f. iterácia\n', mean(overtrainEpochs));
+fprintf('Celkový čas (5 behov): %.2f sekúnd\n', totalTime);
+
+% Kontingenčná matica pre posledný model
+figure;
+plotconfusion(YTest, YPred, 'Finálna CNN');
+
+% --- VIZUALIZÁCIA 10 ČÍSLIC ---
+figure('Name', 'Ukážky klasifikácie (0-9)');
+triedy = categories(YTest);
+for i = 1:10
+    idx = find(YTest == triedy{i}, 1); 
+    subplot(2,5,i); 
+    imshow(XTest(:,:,:,idx));
+    title(sprintf('Real: %c | Odhad: %c', char(YTest(idx)), char(YPred(idx))));
+end
+
+%% POMOCNÉ FUNKCIE PRE NAČÍTANIE MNIST (idx formát)
+function images = loadMNISTImages(filename)
+    fp = fopen(filename, 'rb');
+    if fp == -1, error('Súbor %s neexistuje!', filename); end
+    fread(fp, 1, 'int32', 0, 'ieee-be'); % magic number
+    numImages = fread(fp, 1, 'int32', 0, 'ieee-be');
+    numRows = fread(fp, 1, 'int32', 0, 'ieee-be');
+    numCols = fread(fp, 1, 'int32', 0, 'ieee-be');
+    raw_data = fread(fp, inf, 'unsigned char');
+    fclose(fp);
+    images = reshape(raw_data, [numCols, numRows, 1, numImages]);
+    images = permute(images, [2, 1, 3, 4]); % Otočenie kvôli formátu Matlabu
+    images = double(images) / 255; % Normalizácia
+end
+
+function labels = loadMNISTLabels(filename)
+    fp = fopen(filename, 'rb');
+    if fp == -1, error('Súbor %s neexistuje!', filename); end
+    fread(fp, 1, 'int32', 0, 'ieee-be'); % magic
+    fread(fp, 1, 'int32', 0, 'ieee-be'); % numLabels
+    labels = fread(fp, inf, 'unsigned char');
+    fclose(fp);
+end
