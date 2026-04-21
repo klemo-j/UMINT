@@ -201,6 +201,10 @@
 </table>
 <p align="center"><em>Tabuľka 6: Výsledky 5 spustení pre prvú architektúru CNN.</em></p>
 
+<img src="pic/lahka_CNN_training.png" width="45%">
+<img src="pic/lahka_CNN_obrazky.png" width="45%">
+<img src="pic/lahka_CNN_confusion.png" width="45%">
+
 <h4>Stredná CNN (Architektúra 2)</h4>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -222,6 +226,10 @@
 </table>
 <p align="center"><em>Tabuľka 7: Výsledky 5 spustení pre druhú architektúru CNN.</em></p>
 
+<img src="pic/stredna_CNN_traning.png" width="45%">
+<img src="pic/stredna_CNN_obrazky.png" width="45%">
+<img src="pic/stredna_CNN_confusion.png" width="45%">
+
 <h4>Hlboká CNN (Architektúra 3)</h4>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -242,6 +250,10 @@
   </tbody>
 </table>
 <p align="center"><em>Tabuľka 8: Výsledky 5 spustení pre tretiu architektúru CNN.</em></p>
+
+<img src="pic/tazka_CNN_traning.png" width="45%">
+<img src="pic/tazka_CNN_obrazky.png" width="45%">
+<img src="pic/tazka_CNN_confusion.png" width="45%">
 
 <h3>2.3 Súhrnné porovnanie architektúr CNN</h3>
 <table border="1" cellpadding="8" cellspacing="0" align="center">
@@ -280,17 +292,7 @@
 </table>
 <p align="center"><em>Tabuľka 9: Súhrnné porovnanie porovnávaných architektúr CNN.</em></p>
 
-<div align="center">
-  <br>
-  <img src="data/tazka_CNN_traning.png" alt="Trénovanie - Hlboká CNN" width="45%">
-  <img src="data/tazka_CNN_confusion.png" alt="Matica - Hlboká CNN" width="35%">
-  <p><em>Ukážka priebehu trénovania a konfúznej matice pre najúspešnejší model (Hlboká CNN).</em></p>
-</div>
 
-<div align="center">
-  <img src="data/tazka_CNN_obrazky.png" alt="Ukážka klasifikácie" width="80%">
-  <p><em>Predikcia modelu Hlbokej CNN na náhodne vybraných vzorkách.</em></p>
-</div>
 
 <hr>
 
@@ -370,11 +372,9 @@
   <strong>Zhodnotenie:</strong> Výsledky preukázali význam regularizácie. Zatiaľ čo pri nulovom dropoute dochádzalo k rýchlemu memorovaniu dát (pretrénovanie v 62. iterácii), nasadenie veľmi silného dropoutu (0.7) posunulo tento bod až na 193. iteráciu. Model tak nadobudol výbornú generalizačnú schopnosť.
 </p>
 
-<div align="center">
-  <br>
-  <img src="data/CNN_Drop_00.png" alt="Priebeh učenia - Dropout 0.0" width="45%">
-  <p><em>Ukážka rýchleho pretrénovania pri absencii regularizácie (Dropout = 0.0).</em></p>
-</div>
+<img src="pic/lahka_CNN_0drop_training.png" width="45%">
+<img src="pic/lahka_CNN_0.7drop_training.png" width="45%">
+<img src="pic/lahka_CNN_0.3drop_training.png" width="45%">
 
 <hr>
 
