@@ -218,6 +218,6 @@
 
 <div align="center">
   <br>
-  <img src="https://github.com/klemo-j/UMINT/blob/CV8/predikcie.jpg?raw=true" width="80%" alt="Ukážky predikcií">
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/predikcie.png?raw=true" width="80%" alt="Ukážky predikcií">
   <p><em>Obr 5: Správne predikcie najlepšieho modelu (MobileNetV2 TL + Aug) na náhodných vzorkách.</em></p>
 </div>
