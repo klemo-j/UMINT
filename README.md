@@ -54,7 +54,7 @@
 <hr>
 
 <h2>🍎 2. Model M1: AlexNet</h2>
-<p>AlexNet predstavuje staršiu, ale výpočtovo rýchlu architektúru. V režime Scratch dosahoval priemerné výsledky, no TL výrazne pomohol stabilizovať trénovanie a zvýšiť presnosť.</p>
+<p>AlexNet vykazoval najväčší rozdiel v stabilite. Zatiaľ čo pri trénovaní od nuly bola úspešnosť len okolo 60 %, Transfer Learning posunul model na hranicu 87 %.</p>
 
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -76,25 +76,25 @@
     </tr>
     <tr>
       <td align="center" style="background-color: #e6f3ff;"><strong>Transfer Learning</strong></td>
-      <td align="center" style="background-color: #e6f3ff;">80.9%</td>
-      <td align="center" style="background-color: #e6f3ff;">75.2%</td>
-      <td align="center" style="background-color: #e6f3ff;"><strong>80.5%</strong></td>
-      <td align="center" style="background-color: #e6f3ff;">0.5920</td>
+      <td align="center" style="background-color: #e6f3ff;">99.9%</td>
+      <td align="center" style="background-color: #e6f3ff;">81.2%</td>
+      <td align="center" style="background-color: #e6f3ff;"><strong>87.2%</strong></td>
+      <td align="center" style="background-color: #e6f3ff;">0.5876</td>
     </tr>
   </tbody>
 </table>
 
 <div align="center">
   <br>
-  <img src="TU_VLOZ_HYPERLINK_NA_M1_AlexNet_scratch_vs_tl.png" width="48%" alt="AlexNet Scratch vs TL">
-  <img src="TU_VLOZ_HYPERLINK_NA_M1_AlexNet_TL_najlepsi.png" width="48%" alt="AlexNet Najlepší Beh">
-  <p><em>Obr 1: Porovnanie priebehu trénovania AlexNet (vľavo) a detail najlepšieho TL behu (vpravo).</em></p>
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M1_AlexNet_scratch_vs_tl.png?raw=true" width="48%" alt="AlexNet Scratch vs TL">
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M1_AlexNet_TL_najlepsi.png?raw=true" width="48%" alt="AlexNet Najlepší Beh">
+  <p><em>Obr 1: Porovnanie AlexNet – TL verzia dosahuje takmer 100 % tréningovú presnosť.</em></p>
 </div>
 
 <hr>
 
 <h2>🥗 3. Model M2: ResNet18</h2>
-<p>ResNet18 využíva reziduálne prepojenia. Pri trénovaní od nuly mal model silnú tendenciu k pretrénovaniu (Train Acc 100%, ale Test Acc len 56%), čo potvrdzuje dôležitosť TL pre hlboké siete na menších datasetoch.</p>
+<p>ResNet18 v režime TL prekonal stanovenú hranicu 90 %. Pri trénovaní od nuly (Scratch) je opäť viditeľné masívne pretrénovanie (Overfitting), kde model dosahuje 100 % na tréningových dátach, ale na testovacích len 57 %.</p>
 
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -110,31 +110,31 @@
     <tr>
       <td align="center">Scratch</td>
       <td align="center">100.0%</td>
-      <td align="center">51.3%</td>
-      <td align="center">56.7%</td>
-      <td align="center">1.4241</td>
+      <td align="center">51.5%</td>
+      <td align="center">57.1%</td>
+      <td align="center">1.4147</td>
     </tr>
     <tr>
       <td align="center" style="background-color: #e6f3ff;"><strong>Transfer Learning</strong></td>
-      <td align="center" style="background-color: #e6f3ff;">76.1%</td>
-      <td align="center" style="background-color: #e6f3ff;">75.0%</td>
-      <td align="center" style="background-color: #e6f3ff;"><strong>80.1%</strong></td>
-      <td align="center" style="background-color: #e6f3ff;">0.8655</td>
+      <td align="center" style="background-color: #e6f3ff;">100.0%</td>
+      <td align="center" style="background-color: #e6f3ff;">88.0%</td>
+      <td align="center" style="background-color: #e6f3ff;"><strong>92.7%</strong></td>
+      <td align="center" style="background-color: #e6f3ff;">0.2329</td>
     </tr>
   </tbody>
 </table>
 
 <div align="center">
   <br>
-  <img src="TU_VLOZ_HYPERLINK_NA_M2_ResNet18_scratch_vs_tl.png" width="48%" alt="ResNet18 Scratch vs TL">
-  <img src="TU_VLOZ_HYPERLINK_NA_M2_ResNet18_TL_najlepsi.png" width="48%" alt="ResNet18 Najlepší Beh">
-  <p><em>Obr 2: Porovnanie priebehu trénovania ResNet18. V režime Scratch je jasne vidieť masívne pretrénovanie.</em></p>
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M2_ResNet18_scratch_vs_tl.png?raw=true" width="48%" alt="ResNet18 Scratch vs TL">
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M2_ResNet18_TL_najlepsi.png?raw=true" width="48%" alt="ResNet18 Najlepší Beh">
+  <p><em>Obr 2: Priebeh ResNet18 – TL stabilizoval validáciu a výrazne znížil Test Loss.</em></p>
 </div>
 
 <hr>
 
 <h2>🍣 4. Model M3: MobileNetV2 (Víťaz experimentu)</h2>
-<p>MobileNetV2 sa ukázal ako najvhodnejšia architektúra pre túto úlohu. V režime TL dosiahol najvyššiu priemernú presnosť presahujúcu 85 %.</p>
+<p>MobileNetV2 je vďaka Transfer Learningu najúspešnejším modelom, pričom priemerná presnosť na testovacom datasete dosiahla <strong>93.9 %</strong>, čím splnil podmienku zadania.</p>
 
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f9f9f9;">
@@ -149,32 +149,32 @@
   <tbody>
     <tr>
       <td align="center">Scratch</td>
-      <td align="center">58.6%</td>
-      <td align="center">38.3%</td>
-      <td align="center">42.1%</td>
-      <td align="center">1.6365</td>
+      <td align="center">58.0%</td>
+      <td align="center">37.7%</td>
+      <td align="center">42.2%</td>
+      <td align="center">1.6305</td>
     </tr>
     <tr>
       <td align="center" style="background-color: #e6ffec;"><strong>Transfer Learning</strong></td>
-      <td align="center" style="background-color: #e6ffec;"><strong>81.2%</strong></td>
-      <td align="center" style="background-color: #e6ffec;"><strong>81.7%</strong></td>
-      <td align="center" style="background-color: #e6ffec;"><strong>85.4%</strong></td>
-      <td align="center" style="background-color: #e6ffec;">0.6156</td>
+      <td align="center" style="background-color: #e6ffec;"><strong>100.0%</strong></td>
+      <td align="center" style="background-color: #e6ffec;"><strong>89.1%</strong></td>
+      <td align="center" style="background-color: #e6ffec;"><strong>93.9%</strong></td>
+      <td align="center" style="background-color: #e6ffec;">0.2158</td>
     </tr>
   </tbody>
 </table>
 
 <div align="center">
   <br>
-  <img src="TU_VLOZ_HYPERLINK_NA_M3_MobileNetV2_scratch_vs_tl.png" width="48%" alt="MobileNetV2 Scratch vs TL">
-  <img src="TU_VLOZ_HYPERLINK_NA_M3_MobileNetV2_TL_najlepsi.png" width="48%" alt="MobileNetV2 Najlepší Beh">
-  <p><em>Obr 3: MobileNetV2 preukázal najlepšiu schopnosť generalizácie pri použití Transfer Learningu.</em></p>
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M3_MobileNetV2_scratch_vs_tl.png?raw=true" width="48%" alt="MobileNetV2 Scratch vs TL">
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/M3_MobileNetV2_TL_najlepsi.png?raw=true" width="48%" alt="MobileNetV2 Najlepší Beh">
+  <p><em>Obr 3: MobileNetV2 preukázal najlepšiu generalizáciu a najnižšiu chybovosť.</em></p>
 </div>
 
 <hr>
 
 <h2>🛠️ 5. Experiment: Vplyv Augmentácie (MobileNetV2 TL)</h2>
-<p>Testovali sme vplyv základnej augmentácie (náhodné horizontálne preklopenie a rotácia) na najlepšom modeli. Prekvapivo, pri 40 epochách augmentácia mierne znížila finálnu presnosť, čo naznačuje, že model by potreboval viac epoch na spracovanie takto variabilných dát.</p>
+<p>V tomto experimente augmentácia (rotácia a horizontálne preklopenie) pozitívne ovplyvnila výsledky. Znížila Test Loss z 0.2158 na 0.1915 a zvýšila presnosť na rekordných <strong>94.6 %</strong>.</p>
 
 <table border="1" cellpadding="8" cellspacing="0" align="center">
   <thead style="background-color: #f2f2f2;">
@@ -188,39 +188,36 @@
   <tbody>
     <tr>
       <td align="center">Bez augmentácie</td>
-      <td align="center">81.8%</td>
-      <td align="center"><strong>85.4%</strong></td>
-      <td align="center">0.6156</td>
+      <td align="center">89.1%</td>
+      <td align="center">93.9%</td>
+      <td align="center">0.2158</td>
     </tr>
     <tr>
-      <td align="center">S augmentáciou</td>
-      <td align="center">79.0%</td>
-      <td align="center">82.7%</td>
-      <td align="center">0.7007</td>
+      <td align="center" style="background-color: #e6ffec;"><strong>S augmentáciou</strong></td>
+      <td align="center" style="background-color: #e6ffec;"><strong>89.2%</strong></td>
+      <td align="center" style="background-color: #e6ffec;"><strong>94.6%</strong></td>
+      <td align="center" style="background-color: #e6ffec;"><strong>0.1915</strong></td>
     </tr>
   </tbody>
 </table>
 
 <div align="center">
   <br>
-  <img src="TU_VLOZ_HYPERLINK_NA_mobilenet_v2_aug_comparison.png" width="60%" alt="Porovnanie augmentácie">
-  <p><em>Obr 4: Porovnanie výsledkov MobileNetV2 s a bez použitia augmentácie dát.</em></p>
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/mobilenet_v2_aug_comparison.png?raw=true" width="60%" alt="Porovnanie augmentácie">
+  <p><em>Obr 4: Vplyv augmentácie na stabilitu chybovej funkcie validácie a finálnu presnosť.</em></p>
 </div>
 
 <hr>
 
 <h2>🏆 6. Celkové zhodnotenie</h2>
-<p>
-  Z experimentu vyplýva, že pre úlohy klasifikácie obrazu s obmedzeným počtom dát je <strong>Transfer Learning absolútne kľúčový</strong>. Zatiaľ čo modely trénované od nuly dosahovali Test Acc v rozmedzí 42 - 61 %, modely využívajúce predtrénované váhy z ImageNetu bez problémov prekročili hranicu 80 %.
-</p>
 <ul>
-  <li><strong>Najlepší model:</strong> MobileNetV2 (TL) s úspešnosťou 85.4 %.</li>
-  <li><strong>Zistenie o Scratch:</strong> Moderné hlboké architektúry (ResNet, MobileNet) bez predtrénovania na malých dátach masívne pretrénovávajú alebo konvergujú veľmi pomaly.</li>
-  <li><strong>Zistenie o TL:</strong> Transfer Learning nielen zvyšuje presnosť, ale radikálne zrýchľuje proces učenia (vysoká presnosť už po 5. epoche).</li>
+  <li><strong>Transfer Learning:</strong> Je pre tento typ úlohy nevyhnutný. Modely Scratch končia na hranici 42-61 %, zatiaľ čo TL modely presahujú 93 %.</li>
+  <li><strong>Overfitting:</strong> ResNet18 a AlexNet vykazujú silné pretrénovanie v Scratch režime (100 % tréning vs. nízka testovacia presnosť).</li>
+  <li><strong>Augmentácia:</strong> Pomohla zvýšiť generalizačnú schopnosť MobileNetV2 a dosiahnuť najlepší výsledok celého zadania (94.6 %).</li>
 </ul>
 
 <div align="center">
   <br>
-  <img src="TU_VLOZ_HYPERLINK_NA_predikcie.jpg" width="80%" alt="Ukážky predikcií">
-  <p><em>Obr 5: Ukážka klasifikácie jedál najlepším modelom na testovacom datasete.</em></p>
+  <img src="https://github.com/klemo-j/UMINT/blob/CV8/predikcie.jpg?raw=true" width="80%" alt="Ukážky predikcií">
+  <p><em>Obr 5: Správne predikcie najlepšieho modelu (MobileNetV2 TL + Aug) na náhodných vzorkách.</em></p>
 </div>
