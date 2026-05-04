@@ -46,22 +46,22 @@ intervaly = [10 10 10]
 ### Režim 3 — Špička smer C
 > Koniec: **17** | Max: **25**
 
-![Režim 3 pevné](rezim3_fuzzy0.png)
+![Režim 3 pevné](no%20fuzzy/rezim3_fuzzy0.png)
 
 ### Režim 4 — Špička smer B
 > Koniec: **18** | Max: **27**
 
-![Režim 4 pevné](rezim4_fuzzy0.png)
+![Režim 4 pevné](no%20fuzzy/rezim4_fuzzy0.png)
 
 ### Režim 5 — Špička smer A
 > Koniec: **38** ⚠️ | Max: **39** ⚠️
 
-![Režim 5 pevné](rezim5_fuzzy0.png)
+![Režim 5 pevné](no%20fuzzy/rezim5_fuzzy0.png)
 
 ### Režim 6 — Kombinovaná špička
 > Koniec: **57** ⚠️ | Max: **60** ⚠️
 
-![Režim 6 pevné](rezim6_fuzzy0.png)
+![Režim 6 pevné](no%20fuzzy/rezim6_fuzzy0.png)
 
 ---
 
@@ -125,22 +125,22 @@ Kľúčové zistenie pri ladení: minimálna doba zelenej musí byť aspoň **5 
 ### Režim 3 — Špička smer C
 > Koniec: **10** ✅ | Max: **21** ✅
 
-![Režim 3 fuzzy](rezim3_fuzzy1.png)
+![Režim 3 fuzzy](fuzzy/rezim3_fuzzy1.png)
 
 ### Režim 4 — Špička smer B
 > Koniec: **7** ✅ | Max: **20** ✅
 
-![Režim 4 fuzzy](rezim4_fuzzy1.png)
+![Režim 4 fuzzy](fuzzy/rezim4_fuzzy1.png)
 
 ### Režim 5 — Špička smer A
 > Koniec: **8** ✅ | Max: **23** ✅
 
-![Režim 5 fuzzy](rezim5_fuzzy1.png)
+![Režim 5 fuzzy](fuzzy/rezim5_fuzzy1.png)
 
 ### Režim 6 — Kombinovaná špička
 > Koniec: **9** ✅ | Max: **33** ✅
 
-![Režim 6 fuzzy](rezim6_fuzzy1.png)
+![Režim 6 fuzzy](fuzzy/rezim6_fuzzy1.png)
 
 ---
 
